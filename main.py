@@ -1,16 +1,24 @@
-# This is a sample Python script.
-
-# Press ⌃R to execute it or replace it with your code.
-# Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
+from chatterbot import ChatBot
+from chatterbot.trainers import ChatterBotCorpusTrainer
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press ⌘F8 to toggle the breakpoint.
+# Create a new chat bot named Charlie
+chatbot = ChatBot('JobOpenings')
 
+# Create a new trainer for the chatbot
+trainer = ChatterBotCorpusTrainer(chatbot)
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
+# Train the chatbot based on the english corpus
+trainer.train("chatterbot.corpus.english")
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+# Get a response to an input statement
+print("Type something to begin...")
+
+while True:
+    try:
+        user_input = input()
+        response = chatbot.get_response(user_input)
+        print(response)
+
+    except (KeyboardInterrupt, EOFError, SystemExit):
+        break

@@ -1,0 +1,45 @@
+Index: main.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+># This is a sample Python script.\n\n# Press ⌃R to execute it or replace it with your code.\n# Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.\n\n\ndef print_hi(name):\n    # Use a breakpoint in the code line below to debug your script.\n    print(f'Hi, {name}')  # Press ⌘F8 to toggle the breakpoint.\n\n\n# Press the green button in the gutter to run the script.\nif __name__ == '__main__':\n    print_hi('PyCharm')\n\n# See PyCharm help at https://www.jetbrains.com/help/pycharm/\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/main.py b/main.py
+--- a/main.py	(revision 9acaeed5c5b867eb669189680c010d4cba4047c0)
++++ b/main.py	(date 1715785612180)
+@@ -1,16 +1,24 @@
+-# This is a sample Python script.
++from chatterbot import ChatBot
++from chatterbot.trainers import ChatterBotCorpusTrainer
+ 
+-# Press ⌃R to execute it or replace it with your code.
+-# Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
+ 
++# Create a new chat bot named Charlie
++chatbot = ChatBot('JobOpenings')
+ 
+-def print_hi(name):
+-    # Use a breakpoint in the code line below to debug your script.
+-    print(f'Hi, {name}')  # Press ⌘F8 to toggle the breakpoint.
++# Create a new trainer for the chatbot
++trainer = ChatterBotCorpusTrainer(chatbot)
+ 
++# Train the chatbot based on the english corpus
++trainer.train("chatterbot.corpus.english")
+ 
+-# Press the green button in the gutter to run the script.
+-if __name__ == '__main__':
+-    print_hi('PyCharm')
++# Get a response to an input statement
++print("Type something to begin...")
+ 
+-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
++while True:
++    try:
++        user_input = input()
++        response = chatbot.get_response(user_input)
++        print(response)
++
++    except (KeyboardInterrupt, EOFError, SystemExit):
++        break
